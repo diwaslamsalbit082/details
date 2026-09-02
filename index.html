@@ -92,80 +92,76 @@
     text-align:center;
   }
 
-  /* ---------- top signature badge ---------- */
+  /* ---------- premium digital signature ---------- */
   .badge{
     position:relative;
-    width:84px;
-    height:84px;
-    margin-bottom:30px;
-    opacity:0;
-    transform:translateY(-16px) scale(0.85);
-    animation:
-      reveal-badge 0.9s cubic-bezier(.2,.8,.2,1) 0.05s forwards,
-      float 5s ease-in-out 1s infinite;
-  }
-  @keyframes reveal-badge{
-    to{ opacity:1; transform:translateY(0) scale(1); }
-  }
-  @keyframes float{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-7px); }
-  }
-  .badge::before,
-  .badge::after{
-    content:"";
-    position:absolute;
-    top:50%; left:50%;
-    width:5px; height:5px;
-    margin:-2.5px 0 0 -2.5px;
-    border-radius:50%;
-    background:var(--gold-soft);
-    box-shadow:0 0 9px 2px var(--gold-soft);
-    animation: orbit 7s linear infinite;
-  }
-  .badge::after{
-    background:var(--violet);
-    box-shadow:0 0 9px 2px var(--violet);
-    animation-duration:9.5s;
-    animation-direction:reverse;
-  }
-  @keyframes orbit{
-    from{ transform: rotate(0deg) translateX(50px) rotate(0deg); }
-    to{ transform: rotate(360deg) translateX(50px) rotate(-360deg); }
-  }
-  .badge-ring{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    padding:2px;
-    background:conic-gradient(from 0deg, var(--gold-soft), var(--violet), var(--cyan), var(--gold-soft));
-    animation: spin 6.5s linear infinite;
-    box-shadow:
-      0 0 26px rgba(240,185,61,0.3),
-      0 0 55px rgba(140,123,240,0.22);
-  }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-  .badge-inner{
-    width:100%;
-    height:100%;
-    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(10,13,26,0.72);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    box-shadow:inset 0 0 22px rgba(255,255,255,0.06);
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.15rem;
-    letter-spacing:0.03em;
-    color:var(--ink-0);
-    animation: pulse-glow 3.4s ease-in-out infinite;
+    width:min(92vw, 390px);
+    min-height:58px;
+    margin-bottom:30px;
+    padding:11px 22px;
+    opacity:0;
+    transform:translateY(-16px) scale(0.96);
+    animation:
+      reveal-badge 0.9s cubic-bezier(.2,.8,.2,1) 0.05s forwards;
   }
-  @keyframes pulse-glow{
-    0%,100%{ box-shadow:inset 0 0 22px rgba(255,255,255,0.06), 0 0 0 rgba(240,185,61,0); }
-    50%{ box-shadow:inset 0 0 22px rgba(255,255,255,0.1), 0 0 22px rgba(240,185,61,0.28); }
+
+  @keyframes reveal-badge{
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .badge::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border:1px solid rgba(255,255,255,0.075);
+    border-radius:999px;
+    background:
+      linear-gradient(110deg, rgba(87,224,201,0.035), rgba(140,123,240,0.075), rgba(240,185,61,0.035));
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 0 24px rgba(140,123,240,0.08);
+    pointer-events:none;
+  }
+
+  .badge-inner{
+    position:relative;
+    z-index:1;
+    display:block;
+    font-family:'Manrope', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.15rem, 4vw, 1.65rem);
+    line-height:1;
+    letter-spacing:0.18em;
+    white-space:nowrap;
+    color:#fffdf7;
+    text-shadow:
+      0 0 7px rgba(255,255,255,0.45),
+      0 0 18px rgba(87,224,201,0.28),
+      0 0 30px rgba(140,123,240,0.22);
+    animation: signature-breathe 3.8s ease-in-out infinite;
+  }
+
+  @keyframes signature-breathe{
+    0%,100%{
+      filter:brightness(0.98);
+      text-shadow:
+        0 0 7px rgba(255,255,255,0.38),
+        0 0 17px rgba(87,224,201,0.22),
+        0 0 28px rgba(140,123,240,0.18);
+    }
+    50%{
+      filter:brightness(1.13);
+      text-shadow:
+        0 0 9px rgba(255,255,255,0.62),
+        0 0 22px rgba(87,224,201,0.34),
+        0 0 38px rgba(140,123,240,0.32),
+        0 0 48px rgba(240,185,61,0.12);
+    }
   }
 
   h1{
@@ -392,18 +388,22 @@
 
   @media (max-width:420px){
     .stage{ padding:6vh 16px 12vh; }
-    .badge{ width:64px; height:64px; margin-bottom:22px; }
-    .badge-inner{ font-size:0.92rem; }
-    @keyframes orbit{
-      from{ transform: rotate(0deg) translateX(38px) rotate(0deg); }
-      to{ transform: rotate(360deg) translateX(38px) rotate(-360deg); }
+    .badge{
+      width:94vw;
+      min-height:52px;
+      margin-bottom:22px;
+      padding:9px 14px;
+    }
+    .badge-inner{
+      font-size:clamp(0.82rem, 4.5vw, 1.12rem);
+      letter-spacing:0.13em;
     }
     .card{ padding:14px 15px; gap:13px; }
     .icon-wrap{ width:42px; height:42px; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .badge,.badge-ring,.badge-inner,.badge::before,.badge::after,h1,.subtitle,.card,footer{
+    .badge,.badge-inner,h1,.subtitle,.card,footer{
       animation:none !important;
       opacity:1 !important;
       transform:none !important;
@@ -419,9 +419,7 @@
 
 <main class="stage">
   <div class="badge" role="presentation" aria-hidden="true">
-    <div class="badge-ring">
-      <div class="badge-inner">DL</div>
-    </div>
+    <div class="badge-inner">DIWAS LAMSAL</div>
   </div>
   <h1>Let&rsquo;s <em>connect</em></h1>
   <p class="subtitle">Find me on social media, or drop a line by email &mdash; I&rsquo;d love to hear from you.</p>
@@ -687,66 +685,172 @@
 
   class Rocket{
     constructor(){
-      const originX = W/2 + rand(-W*0.22, W*0.22);
-      this.x = originX;
-      this.y = H + 10;
-      this.targetY = rand(H*0.16, H*0.58);
-      this.vy = -rand(9.5, 13);
-      this.vx = rand(-1.6, 1.6);
+      // Every rocket originates from the exact same central-bottom launch point.
+      this.startX = W / 2;
+      this.startY = H + 8;
+
+      this.x = this.startX;
+      this.y = this.startY;
+
+      // Random target + a smooth control point creates a unique quadratic curve.
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const targetSpread = rand(W * 0.16, W * 0.42);
+      this.targetX = Math.max(W * 0.08, Math.min(W * 0.92, this.startX + side * targetSpread));
+      this.targetY = rand(H * 0.15, H * 0.56);
+
+      // Keep the control point near the center so launches begin naturally upward,
+      // then gradually bend toward the target instead of snapping direction.
+      const curve = rand(W * 0.08, W * 0.25) * side;
+      this.controlX = this.startX + curve;
+      this.controlY = rand(H * 0.48, H * 0.70);
+
+      this.progress = 0;
+      this.flightTime = rand(78, 126);
+      this.speedFactor = rand(0.88, 1.12);
       this.color = pick(PALETTE);
+
       this.trail = [];
+      this.trailDust = [];
       this.dead = false;
+      this.age = 0;
     }
+
     update(dt){
-      this.trail.push([this.x,this.y]);
-      if(this.trail.length > 10) this.trail.shift();
-      this.x += this.vx*dt;
-      this.y += this.vy*dt;
-      this.vy += 0.02*dt;
-      if(this.y <= this.targetY || this.vy >= -0.5){
+      this.age += dt;
+
+      // Natural acceleration/deceleration: quick enough to feel exciting,
+      // but deliberately capped so the curve remains visible.
+      const raw = Math.min(this.age / this.flightTime, 1);
+      const eased = 1 - Math.pow(1 - raw, 1.22);
+      this.progress = Math.min(eased * this.speedFactor, 1);
+
+      const t = this.progress;
+      const inv = 1 - t;
+
+      const nx =
+        inv * inv * this.startX +
+        2 * inv * t * this.controlX +
+        t * t * this.targetX;
+
+      const ny =
+        inv * inv * this.startY +
+        2 * inv * t * this.controlY +
+        t * t * this.targetY;
+
+      this.x = nx;
+      this.y = ny;
+
+      this.trail.push([this.x, this.y]);
+      if(this.trail.length > 22) this.trail.shift();
+
+      // Tiny fading sparks add texture to the trail without creating a
+      // second full particle system.
+      if(Math.random() < 0.72){
+        this.trailDust.push({
+          x:this.x + rand(-1.8,1.8),
+          y:this.y + rand(-1.8,1.8),
+          life:rand(8,18),
+          size:rand(0.45,1.15)
+        });
+      }
+      for(let i=this.trailDust.length-1;i>=0;i--){
+        this.trailDust[i].life -= dt;
+        if(this.trailDust[i].life <= 0) this.trailDust.splice(i,1);
+      }
+      if(this.trailDust.length > 28) this.trailDust.splice(0, this.trailDust.length - 28);
+
+      if(raw >= 1 || t >= 0.998){
+        this.x = this.targetX;
+        this.y = this.targetY;
         this.explode();
         this.dead = true;
       }
+
       return !this.dead;
     }
+
     explode(){
       if(particles.length > MAX_PARTICLES) return;
+
       const shape = pick(SHAPES);
       const budget = Math.max(0, MAX_PARTICLES - particles.length);
-      const count = Math.min(isSmall()? rand(28,42) : rand(42,72), budget);
+      const count = Math.min(
+        isSmall() ? rand(34,52) : rand(52,82),
+        budget
+      );
       const vecs = explosionVectors(shape, Math.floor(count));
-      const life = rand(50,80);
+      const life = rand(54,88);
       const baseColor = Math.random() < 0.35 ? pick(PALETTE) : this.color;
+
       vecs.forEach(([vx,vy]) => {
         const c = Math.random() < 0.25 ? pick(PALETTE) : baseColor;
         particles.push(new Particle(
           this.x, this.y,
-          vx*rand(0.85,1.15), vy*rand(0.85,1.15),
-          c, life*rand(0.8,1.15), rand(1.4,2.6)
+          vx*rand(0.86,1.18), vy*rand(0.86,1.18),
+          c, life*rand(0.82,1.16), rand(1.3,2.7)
         ));
       });
+
+      // A restrained bright core makes each burst feel more cinematic.
+      for(let i=0;i<(isSmall()?5:8);i++){
+        particles.push(new Particle(
+          this.x, this.y,
+          rand(-0.7,0.7), rand(-0.7,0.7),
+          '#fff', rand(10,18), rand(1.2,2.2)
+        ));
+      }
     }
+
     draw(ctx){
-      ctx.globalAlpha = 1;
-      for(let i=0;i<this.trail.length;i++){
-        const [tx,ty] = this.trail[i];
-        ctx.globalAlpha = (i/this.trail.length)*0.5;
+      // Soft atmospheric glow around the moving rocket head.
+      const glow = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,15);
+      glow.addColorStop(0, this.color + 'dd');
+      glow.addColorStop(0.28, this.color + '55');
+      glow.addColorStop(1, 'transparent');
+      ctx.globalAlpha = 0.9;
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,15,0,Math.PI*2);
+      ctx.fill();
+
+      // Smooth curved trail.
+      for(let i=1;i<this.trail.length;i++){
+        const a = i / this.trail.length;
+        const [x1,y1] = this.trail[i-1];
+        const [x2,y2] = this.trail[i];
+        ctx.globalAlpha = a * 0.55;
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 1.0 + a * 1.5;
+        ctx.beginPath();
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
+        ctx.stroke();
+      }
+
+      // Fading micro-particles inside the trail.
+      for(const dust of this.trailDust){
+        ctx.globalAlpha = Math.max(0, dust.life / 18) * 0.65;
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(tx,ty, 1.6, 0, Math.PI*2);
+        ctx.arc(dust.x,dust.y,dust.size,0,Math.PI*2);
         ctx.fill();
       }
+
+      // Bright rocket core.
       ctx.globalAlpha = 1;
       ctx.fillStyle = '#fff';
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = this.color;
       ctx.beginPath();
-      ctx.arc(this.x,this.y,2,0,Math.PI*2);
+      ctx.arc(this.x,this.y,2.2,0,Math.PI*2);
       ctx.fill();
+      ctx.shadowBlur = 0;
     }
   }
 
   let lastLaunch = 0;
-  let nextInterval = rand(350, 800);
-  const maxRockets = isSmall() ? 3 : 7;
+  let nextInterval = rand(420, 820);
+  const maxRockets = isSmall() ? 3 : 6;
 
   function maybeLaunch(now){
     if(reduceMotion) return;
@@ -771,7 +875,7 @@
 
     ctx.setTransform(DPR,0,0,DPR,0,0);
     ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = 'rgba(5,6,11,0.22)';
+    ctx.fillStyle = 'rgba(5,6,11,0.19)';
     ctx.fillRect(0,0,W,H);
 
     ctx.globalCompositeOperation = 'lighter';
