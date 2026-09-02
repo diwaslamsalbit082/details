@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Let's Connect</title>
+<meta name="description" content="Find me on social media or get in touch." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#05060b;
+    --bg-1:#0a0d1a;
+    --bg-2:#0d1122;
+    --ink-0:#f4f2ec;
+    --ink-1:#aab0c4;
+    --ink-2:#6b7189;
+    --gold:#f0b93d;
+    --gold-soft:#f7d488;
+    --violet:#8c7bf0;
+    --cyan:#57e0c9;
+    --hairline:rgba(255,255,255,0.09);
+    --glass:rgba(255,255,255,0.025);
+    --radius:18px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+    background:var(--bg-0);
+    color:var(--ink-0);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(140,123,240,0.10), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(240,185,61,0.08), transparent 60%),
+      linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 45%, var(--bg-2) 100%);
+  }
+
+  /* ---------- starfield ---------- */
+  #stars{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+  .star-layer{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:transparent;
+  }
+  .star-layer.a{ animation: twinkle 4.5s ease-in-out infinite; }
+  .star-layer.b{ animation: twinkle 6.5s ease-in-out infinite 1.2s; }
+  @keyframes twinkle{
+    0%,100%{ opacity:0.35; }
+    50%{ opacity:1; }
+  }
+
+  /* ---------- fireworks canvas ---------- */
+  #fireworks{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    width:100%;
+    height:100%;
+  }
+
+  /* ---------- layout ---------- */
+  .stage{
+    position:relative;
+    z-index:2;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100svh;
+    padding:8vh 20px 14vh;
+    text-align:center;
+  }
+
+  /* ---------- premium digital signature ---------- */
+  .badge{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:min(92vw, 390px);
+    min-height:58px;
+    margin-bottom:30px;
+    padding:11px 22px;
+    opacity:0;
+    transform:translateY(-16px) scale(0.96);
+    animation:
+      reveal-badge 0.9s cubic-bezier(.2,.8,.2,1) 0.05s forwards;
+  }
+
+  @keyframes reveal-badge{
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .badge::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border:1px solid rgba(255,255,255,0.075);
+    border-radius:999px;
+    background:
+      linear-gradient(110deg, rgba(87,224,201,0.035), rgba(140,123,240,0.075), rgba(240,185,61,0.035));
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 0 24px rgba(140,123,240,0.08);
+    pointer-events:none;
+  }
+
+  .badge-inner{
+    position:relative;
+    z-index:1;
+    display:block;
+    font-family:'Manrope', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.15rem, 4vw, 1.65rem);
+    line-height:1;
+    letter-spacing:0.18em;
+    white-space:nowrap;
+    color:#fffdf7;
+    text-shadow:
+      0 0 7px rgba(255,255,255,0.45),
+      0 0 18px rgba(87,224,201,0.28),
+      0 0 30px rgba(140,123,240,0.22);
+    animation: signature-breathe 3.8s ease-in-out infinite;
+  }
+
+  @keyframes signature-breathe{
+    0%,100%{
+      filter:brightness(0.98);
+      text-shadow:
+        0 0 7px rgba(255,255,255,0.38),
+        0 0 17px rgba(87,224,201,0.22),
+        0 0 28px rgba(140,123,240,0.18);
+    }
+    50%{
+      filter:brightness(1.13);
+      text-shadow:
+        0 0 9px rgba(255,255,255,0.62),
+        0 0 22px rgba(87,224,201,0.34),
+        0 0 38px rgba(140,123,240,0.32),
+        0 0 48px rgba(240,185,61,0.12);
+    }
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-optical-sizing:auto;
+    font-size:clamp(2.4rem, 6vw, 3.6rem);
+    letter-spacing:-0.01em;
+    line-height:1.05;
+    margin:0 0 14px;
+    color:var(--ink-0);
+    opacity:0;
+    transform:translateY(14px);
+    animation: reveal 0.9s cubic-bezier(.2,.8,.2,1) 0.18s forwards;
+  }
+
+  h1 em{
+    font-style:italic;
+    background:linear-gradient(100deg, var(--gold-soft), var(--violet) 85%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .subtitle{
+    font-size:clamp(0.95rem, 2vw, 1.05rem);
+    color:var(--ink-1);
+    max-width:34ch;
+    margin:0 0 46px;
+    line-height:1.6;
+    font-weight:400;
+    opacity:0;
+    transform:translateY(14px);
+    animation: reveal 0.9s cubic-bezier(.2,.8,.2,1) 0.3s forwards;
+  }
+
+  @keyframes reveal{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ---------- contact list ---------- */
+  .contacts{
+    width:100%;
+    max-width:440px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .card{
+    --glow: var(--violet);
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:16px 18px;
+    text-decoration:none;
+    color:var(--ink-0);
+    background:var(--glass);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    backdrop-filter:blur(24px) saturate(160%);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);
+    box-shadow:
+      0 8px 24px rgba(0,0,0,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    overflow:hidden;
+    isolation:isolate;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(14px);
+    animation: reveal 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s ease, box-shadow 0.4s ease, background 0.35s ease;
+  }
+  .contacts .card:nth-child(1){ animation-delay:0.42s; }
+  .contacts .card:nth-child(2){ animation-delay:0.5s; }
+  .contacts .card:nth-child(3){ animation-delay:0.58s; }
+  .contacts .card:nth-child(4){ animation-delay:0.66s; }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    opacity:0.28;
+    background:radial-gradient(140px 90px at 15% 50%, var(--glow), transparent 72%);
+    transition:opacity 0.4s ease;
+  }
+  .card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 22%, transparent 45%);
+    pointer-events:none;
+  }
+
+  .card:hover,
+  .card:focus-visible{
+    transform:translateY(-4px) scale(1.015);
+    background:rgba(255,255,255,0.06);
+    border-color:rgba(255,255,255,0.24);
+    box-shadow:
+      0 14px 34px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 0 34px -4px var(--glow);
+  }
+  .card:hover::before,
+  .card:focus-visible::before{ opacity:0.65; }
+
+  .card:focus-visible{
+    outline:2px solid var(--gold-soft);
+    outline-offset:3px;
+  }
+
+  .card:active{ transform:translateY(-1px) scale(0.99); }
+
+  .icon-wrap{
+    flex:0 0 auto;
+    width:46px;
+    height:46px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
+    color:var(--glow);
+    transition:transform 0.35s cubic-bezier(.2,.8,.2,1), color 0.35s ease;
+  }
+  .card:hover .icon-wrap{ transform:rotate(-6deg) scale(1.08); }
+  .icon-wrap svg{ width:22px; height:22px; }
+
+  .card-text{
+    flex:1;
+    min-width:0;
+    text-align:left;
+  }
+  .platform{
+    display:block;
+    font-size:0.98rem;
+    font-weight:600;
+    color:var(--ink-0);
+    margin-bottom:2px;
+  }
+  .handle{
+    display:block;
+    font-size:0.85rem;
+    color:var(--ink-1);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .go{
+    flex:0 0 auto;
+    width:18px;
+    height:18px;
+    color:var(--ink-2);
+    transform:translateX(0) rotate(0deg);
+    transition:transform 0.35s cubic-bezier(.2,.8,.2,1), color 0.35s ease;
+  }
+  .card:hover .go{ transform:translateX(3px) rotate(45deg); color:var(--ink-0); }
+
+  /* per-platform accent */
+  .card.fb{ --glow:#6f8cff; }
+  .card.ig{ --glow:#f0729a; }
+  .card.tt{ --glow:#57e0c9; }
+  .card.em{ --glow:#f0b93d; }
+
+  /* ripple */
+  .ripple{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.28);
+    transform:scale(0);
+    animation:ripple-anim 0.6s ease-out forwards;
+    pointer-events:none;
+  }
+  @keyframes ripple-anim{
+    to{ transform:scale(1); opacity:0; }
+  }
+
+  footer{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:20px 20px 30px;
+    letter-spacing:0.01em;
+    opacity:0;
+    animation: reveal 0.9s cubic-bezier(.2,.8,.2,1) 0.78s forwards;
+  }
+  .credit{
+    margin:0 0 5px;
+    font-size:0.92rem;
+    font-weight:600;
+    color:var(--ink-0);
+  }
+  .credit .name{
+    background:linear-gradient(100deg, var(--gold-soft), var(--violet) 85%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation: credit-glow 3.4s ease-in-out infinite;
+  }
+  @keyframes credit-glow{
+    0%,100%{ filter:brightness(1); }
+    50%{ filter:brightness(1.4); }
+  }
+  .credit .heart{
+    display:inline-block;
+    color:#f0729a;
+    animation: heartbeat 1.9s ease-in-out infinite;
+  }
+  @keyframes heartbeat{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.22); }
+  }
+  .made{
+    margin:0;
+    font-size:0.74rem;
+    color:var(--ink-2);
+  }
+  .made span{ color:var(--gold-soft); }
+
+  @media (max-width:420px){
+    .stage{ padding:6vh 16px 12vh; }
+    .badge{
+      width:94vw;
+      min-height:52px;
+      margin-bottom:22px;
+      padding:9px 14px;
+    }
+    .badge-inner{
+      font-size:clamp(0.82rem, 4.5vw, 1.12rem);
+      letter-spacing:0.13em;
+    }
+    .card{ padding:14px 15px; gap:13px; }
+    .icon-wrap{ width:42px; height:42px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .badge,.badge-inner,h1,.subtitle,.card,footer{
+      animation:none !important;
+      opacity:1 !important;
+      transform:none !important;
+    }
+    .card{ transition:none; }
+  }
+
+  @media (max-width:700px){
+    .card{
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+      background:rgba(10,13,26,0.78);
+      box-shadow:0 6px 18px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.07);
+      transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .card::before{ opacity:0.18; }
+    .card:hover{
+      transform:translateY(-2px);
+    }
+    .badge::before{
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div id="stars" aria-hidden="true"></div>
+<canvas id="fireworks" aria-hidden="true"></canvas>
+
+<main class="stage">
+  <div class="badge" role="presentation" aria-hidden="true">
+    <div class="badge-inner">DIWAS LAMSAL</div>
+  </div>
+  <h1>Let&rsquo;s <em>connect</em></h1>
+  <p class="subtitle">Find me on social media, or drop a line by email &mdash; I&rsquo;d love to hear from you.</p>
+
+  <nav class="contacts" aria-label="Social and contact links">
+    <a class="card fb" href="https://www.facebook.com/diwaslamsal.07" target="_blank" rel="noopener noreferrer">
+      <span class="icon-wrap" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.9h2.65l.4-3.08h-3.05V8.06c0-.89.25-1.5 1.53-1.5h1.63V3.8A22 22 0 0 0 14 3.6c-2.4 0-4.05 1.46-4.05 4.15v2.32H7.3v3.08h2.65V21h3.55Z"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="platform">Facebook</span>
+        <span class="handle">facebook.com/diwaslamsal.07</span>
+      </span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+
+    <a class="card ig" href="https://www.instagram.com/diwaslamsal.07" target="_blank" rel="noopener noreferrer">
+      <span class="icon-wrap" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="platform">Instagram</span>
+        <span class="handle">@diwaslamsal.07</span>
+      </span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+
+    <a class="card tt" href="https://tiktok.com/@diwaslamsall.07" target="_blank" rel="noopener noreferrer">
+      <span class="icon-wrap" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.2 1.9 3.9 4.1 4.2v2.9c-1.5.1-2.9-.4-4.1-1.2v6.8c0 3.1-2.5 5.6-5.6 5.6a5.6 5.6 0 0 1-1.1-11.1v3c-.3-.1-.6-.2-1-.2a2.6 2.6 0 1 0 2.6 2.6V3h5.1Z"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="platform">TikTok</span>
+        <span class="handle">@diwaslamsall.07</span>
+      </span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+
+    <a class="card em" href="mailto:lamsaldiwas1119@gmail.com">
+      <span class="icon-wrap" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m4.5 6.5 7.5 6 7.5-6"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="platform">Email</span>
+        <span class="handle">lamsaldiwas1119@gmail.com</span>
+      </span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+  </nav>
+</main>
+
+<footer>
+  <p class="credit">Built by <span class="name">Diwas Lamsal</span> <span class="heart">&hearts;</span></p>
+  <p class="made">Made with <span>&hearts;</span> &bull; &copy; 2026</p>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ============ starfield (lightweight, CSS-driven) ============ */
+  function buildStars(){
+    const wrap = document.getElementById('stars');
+    wrap.innerHTML = '';
+    const count = window.innerWidth < 640 ? 70 : 130;
+    const layers = [
+      {cls:'a', n:Math.round(count*0.6), size:1},
+      {cls:'b', n:Math.round(count*0.4), size:2}
+    ];
+    layers.forEach(layer => {
+      let shadows = [];
+      for(let i=0;i<layer.n;i++){
+        const x = Math.round(Math.random()*100);
+        const y = Math.round(Math.random()*100);
+        shadows.push(`${x}vw ${y}vh 0 rgba(255,255,255,${(Math.random()*0.5+0.3).toFixed(2)})`);
+      }
+      const el = document.createElement('div');
+      el.className = 'star-layer ' + layer.cls;
+      el.style.width = layer.size + 'px';
+      el.style.height = layer.size + 'px';
+      el.style.boxShadow = shadows.join(',');
+      wrap.appendChild(el);
+    });
+  }
+  buildStars();
+  let starResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(starResizeTimer);
+    starResizeTimer = setTimeout(buildStars, 400);
+  });
+
+  /* ============ ripple feedback on cards ============ */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(e){
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 1.4;
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+      this.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  });
+
+  /* ============ fireworks engine ============ */
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = () => window.innerWidth < 700;
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  const lowPowerDevice = coarsePointer || navigator.hardwareConcurrency <= 4;
+  const motionOK = !reduceMotion;
+
+  // Adaptive quality: starts conservative on phones and automatically scales
+  // down/up according to the recent frame rate.
+  const QUALITY = {
+    phone: {
+      maxParticles: 150,
+      maxRockets: 2,
+      trailPoints: 11,
+      trailDust: 8,
+      explosionMin: 24,
+      explosionMax: 38,
+      coreParticles: 3,
+      glow: false,
+      fade: 0.24
+    },
+    lowPower: {
+      maxParticles: 190,
+      maxRockets: 2,
+      trailPoints: 13,
+      trailDust: 10,
+      explosionMin: 28,
+      explosionMax: 44,
+      coreParticles: 4,
+      glow: false,
+      fade: 0.23
+    },
+    desktop: {
+      maxParticles: 500,
+      maxRockets: 5,
+      trailPoints: 17,
+      trailDust: 14,
+      explosionMin: 44,
+      explosionMax: 66,
+      coreParticles: 6,
+      glow: true,
+      fade: 0.20
+    }
+  };
+
+  let quality = isSmall() ? 'phone' : (lowPowerDevice ? 'lowPower' : 'desktop');
+  let qualityScale = 1;
+
+  function getQuality(){
+    const q = QUALITY[quality];
+    return {
+      maxParticles: Math.max(80, Math.round(q.maxParticles * qualityScale)),
+      maxRockets: Math.max(1, Math.min(q.maxRockets, Math.round(q.maxRockets * Math.min(1, qualityScale + 0.05)))),
+      trailPoints: Math.max(7, Math.round(q.trailPoints * qualityScale)),
+      trailDust: Math.max(4, Math.round(q.trailDust * qualityScale)),
+      explosionMin: Math.max(16, Math.round(q.explosionMin * qualityScale)),
+      explosionMax: Math.max(22, Math.round(q.explosionMax * qualityScale)),
+      coreParticles: Math.max(2, Math.round(q.coreParticles * qualityScale)),
+      glow: q.glow && qualityScale > 0.72,
+      fade: q.fade
+    };
+  }
+
+  let W, H, DPR;
+  function resize(){
+    // Capping DPR is one of the biggest mobile performance wins: a 3x/4x
+    // phone display does not need a 3x/4x fireworks backing canvas.
+    const maxDPR = isSmall() ? 1.25 : (lowPowerDevice ? 1.5 : 1.75);
+    DPR = Math.min(window.devicePixelRatio || 1, maxDPR);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  resize();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resize();
+      if(window.innerWidth < 700) quality = 'phone';
+      else if(lowPowerDevice) quality = 'lowPower';
+      else quality = 'desktop';
+      qualityScale = 1;
+    }, 200);
+  });
+
+  const PALETTE = [
+    '#f0b93d', '#f7d488', '#8c7bf0', '#57e0c9',
+    '#f0729a', '#6f8cff', '#ffe27a', '#ff9d5c'
+  ];
+  const rand = (a,b) => a + Math.random()*(b-a);
+  const pick = arr => arr[(Math.random()*arr.length)|0];
+
+  class Particle{
+    constructor(x,y,vx,vy,color,life,size){
+      this.x=x; this.y=y; this.vx=vx; this.vy=vy;
+      this.color=color;
+      this.life=life; this.maxLife=life;
+      this.size=size;
+      this.gravity=0.045;
+      this.drag=0.985;
+    }
+    update(dt){
+      this.vx *= this.drag;
+      this.vy = this.vy*this.drag + this.gravity*dt;
+      this.x += this.vx*dt;
+      this.y += this.vy*dt;
+      this.life -= dt;
+      return this.life > 0;
+    }
+    draw(ctx){
+      const t = Math.max(this.life/this.maxLife, 0);
+      ctx.globalAlpha = t;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size*Math.max(t,0.15), 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function explosionVectors(shape, count){
+    const vecs = [];
+    switch(shape){
+      case 'circle': {
+        for(let i=0;i<count;i++){
+          const a = (i/count)*Math.PI*2 + rand(-0.05,0.05);
+          const s = rand(2.4,4.2);
+          vecs.push([Math.cos(a)*s, Math.sin(a)*s]);
+        }
+        break;
+      }
+      case 'ring': {
+        for(let i=0;i<count;i++){
+          const a = (i/count)*Math.PI*2;
+          const s = 4.4;
+          vecs.push([Math.cos(a)*s, Math.sin(a)*s]);
+        }
+        break;
+      }
+      case 'star': {
+        const spikes = 5;
+        for(let i=0;i<count;i++){
+          const spike = i % spikes;
+          const base = (spike/spikes)*Math.PI*2;
+          const jitter = rand(-0.12,0.12);
+          const a = base + jitter;
+          const s = (i % 3 === 0) ? rand(4.2,5.2) : rand(1.6,2.6);
+          vecs.push([Math.cos(a-Math.PI/2)*s, Math.sin(a-Math.PI/2)*s]);
+        }
+        break;
+      }
+      case 'heart': {
+        for(let i=0;i<count;i++){
+          const t = (i/count)*Math.PI*2;
+          let x = 16*Math.pow(Math.sin(t),3);
+          let y = -(13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t));
+          x/=16; y/=16;
+          const s = rand(3.0,3.6);
+          vecs.push([x*s, y*s]);
+        }
+        break;
+      }
+      case 'spiral': {
+        const turns = 3;
+        for(let i=0;i<count;i++){
+          const t = i/count;
+          const a = t*Math.PI*2*turns;
+          const s = 1 + t*3.6;
+          vecs.push([Math.cos(a)*s, Math.sin(a)*s]);
+        }
+        break;
+      }
+      case 'burst': {
+        for(let i=0;i<count;i++){
+          const a = rand(0,Math.PI*2);
+          const s = rand(1.5,5.4);
+          vecs.push([Math.cos(a)*s, Math.sin(a)*s]);
+        }
+        break;
+      }
+      case 'flower': {
+        const petals = 6;
+        for(let i=0;i<count;i++){
+          const t = (i/count)*Math.PI*2;
+          const r = (0.55 + 0.45*Math.abs(Math.cos(petals*t/2))) * 4.4;
+          vecs.push([Math.cos(t)*r, Math.sin(t)*r]);
+        }
+        break;
+      }
+      case 'multilayer': {
+        const inner = Math.floor(count*0.4);
+        const outer = count - inner;
+        for(let i=0;i<inner;i++){
+          const a = (i/inner)*Math.PI*2;
+          vecs.push([Math.cos(a)*2.0, Math.sin(a)*2.0]);
+        }
+        for(let i=0;i<outer;i++){
+          const a = (i/outer)*Math.PI*2 + 0.3;
+          vecs.push([Math.cos(a)*4.9, Math.sin(a)*4.9]);
+        }
+        break;
+      }
+      default: { // random/custom
+        for(let i=0;i<count;i++){
+          const a = rand(0,Math.PI*2);
+          const s = rand(0.8,4.8) * (Math.random()<0.15 ? 1.6 : 1);
+          vecs.push([Math.cos(a)*s, Math.sin(a)*s]);
+        }
+      }
+    }
+    return vecs;
+  }
+
+  const SHAPES = ['circle','star','heart','ring','spiral','burst','random','flower','multilayer'];
+
+  let particles = [];
+  let rockets = [];
+  function maxParticles(){ return getQuality().maxParticles; }
+
+  class Rocket{
+    constructor(){
+      // Every rocket originates from the exact same central-bottom launch point.
+      this.startX = W / 2;
+      this.startY = H + 8;
+
+      this.x = this.startX;
+      this.y = this.startY;
+
+      // Random target + a smooth control point creates a unique quadratic curve.
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const targetSpread = rand(W * 0.16, W * 0.42);
+      this.targetX = Math.max(W * 0.08, Math.min(W * 0.92, this.startX + side * targetSpread));
+      this.targetY = rand(H * 0.15, H * 0.56);
+
+      // Keep the control point near the center so launches begin naturally upward,
+      // then gradually bend toward the target instead of snapping direction.
+      const curve = rand(W * 0.08, W * 0.25) * side;
+      this.controlX = this.startX + curve;
+      this.controlY = rand(H * 0.48, H * 0.70);
+
+      this.progress = 0;
+      this.flightTime = rand(78, 126);
+      this.speedFactor = rand(0.88, 1.12);
+      this.color = pick(PALETTE);
+
+      this.trail = [];
+      this.trailDust = [];
+      this.dead = false;
+      this.age = 0;
+    }
+
+    update(dt){
+      this.age += dt;
+
+      // Natural acceleration/deceleration: quick enough to feel exciting,
+      // but deliberately capped so the curve remains visible.
+      const raw = Math.min(this.age / this.flightTime, 1);
+      const eased = 1 - Math.pow(1 - raw, 1.22);
+      this.progress = Math.min(eased * this.speedFactor, 1);
+
+      const t = this.progress;
+      const inv = 1 - t;
+
+      const nx =
+        inv * inv * this.startX +
+        2 * inv * t * this.controlX +
+        t * t * this.targetX;
+
+      const ny =
+        inv * inv * this.startY +
+        2 * inv * t * this.controlY +
+        t * t * this.targetY;
+
+      this.x = nx;
+      this.y = ny;
+
+      this.trail.push([this.x, this.y]);
+      const q = getQuality();
+      if(this.trail.length > q.trailPoints) this.trail.shift();
+
+      // Tiny fading sparks add texture to the trail without creating a
+      // second full particle system.
+      if(Math.random() < (q.trailDust > 10 ? 0.42 : 0.28)){
+        this.trailDust.push({
+          x:this.x + rand(-1.8,1.8),
+          y:this.y + rand(-1.8,1.8),
+          life:rand(8,18),
+          size:rand(0.45,1.15)
+        });
+      }
+      for(let i=this.trailDust.length-1;i>=0;i--){
+        this.trailDust[i].life -= dt;
+        if(this.trailDust[i].life <= 0) this.trailDust.splice(i,1);
+      }
+      if(this.trailDust.length > q.trailDust) {
+        this.trailDust.splice(0, this.trailDust.length - q.trailDust);
+      }
+
+      if(raw >= 1 || t >= 0.998){
+        this.x = this.targetX;
+        this.y = this.targetY;
+        this.explode();
+        this.dead = true;
+      }
+
+      return !this.dead;
+    }
+
+    explode(){
+      const q = getQuality();
+      if(particles.length >= q.maxParticles) return;
+
+      const shape = pick(SHAPES);
+      const budget = Math.max(0, q.maxParticles - particles.length);
+      const count = Math.min(
+        rand(q.explosionMin, q.explosionMax),
+        budget
+      );
+      const vecs = explosionVectors(shape, Math.floor(count));
+      const life = rand(50,78);
+      const baseColor = Math.random() < 0.35 ? pick(PALETTE) : this.color;
+
+      vecs.forEach(([vx,vy]) => {
+        const c = Math.random() < 0.25 ? pick(PALETTE) : baseColor;
+        particles.push(new Particle(
+          this.x, this.y,
+          vx*rand(0.86,1.18), vy*rand(0.86,1.18),
+          c, life*rand(0.82,1.16), rand(1.3,2.7)
+        ));
+      });
+
+      // A restrained bright core makes each burst feel more cinematic.
+      for(let i=0;i<q.coreParticles && particles.length < q.maxParticles;i++){
+        particles.push(new Particle(
+          this.x, this.y,
+          rand(-0.7,0.7), rand(-0.7,0.7),
+          '#fff', rand(10,18), rand(1.2,2.2)
+        ));
+      }
+    }
+
+    draw(ctx){
+      const q = getQuality();
+
+      // Cheap curved trail: one path instead of many individual strokes.
+      if(this.trail.length > 1){
+        ctx.globalAlpha = 0.42;
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = q.glow ? 1.7 : 1.2;
+        ctx.beginPath();
+        ctx.moveTo(this.trail[0][0], this.trail[0][1]);
+        for(let i=1;i<this.trail.length;i++){
+          const p = this.trail[i];
+          ctx.lineTo(p[0], p[1]);
+        }
+        ctx.stroke();
+      }
+
+      // Small trail dust only; no shadowBlur or per-frame gradients.
+      for(const dust of this.trailDust){
+        ctx.globalAlpha = Math.max(0, dust.life / 18) * 0.55;
+        ctx.fillStyle = this.color;
+        ctx.fillRect(dust.x, dust.y, dust.size, dust.size);
+      }
+
+      // Bright rocket core.
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(this.x,this.y, q.glow ? 2.3 : 1.8, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  let lastLaunch = 0;
+  let nextInterval = rand(420, 820);
+  const maxRockets = isSmall() ? 3 : 6;
+
+  function maybeLaunch(now){
+    if(reduceMotion) return;
+    if(now - lastLaunch > nextInterval && rockets.length < maxRockets){
+      const salvo = Math.random() < 0.3 ? Math.floor(rand(2, isSmall() ? 3 : 4)) : 1;
+      for(let i=0; i<salvo && rockets.length < maxRockets; i++){
+        rockets.push(new Rocket());
+      }
+      lastLaunch = now;
+      nextInterval = rand(isSmall() ? 380 : 260, isSmall() ? 850 : 680);
+    }
+  }
+
+  let last = performance.now();
+  let paused = document.hidden;
+  let fpsSamples = 0;
+  let fpsElapsed = 0;
+
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(paused) { last = now; return; }
+
+    const frameMs = now - last;
+    const dt = Math.min(frameMs / 16.67, 2.2);
+    last = now;
+
+    // Adaptive quality every ~1.5 seconds. This keeps the page smooth when
+    // a phone heats up or another app steals GPU/CPU time.
+    fpsElapsed += frameMs;
+    fpsSamples++;
+    if(fpsElapsed >= 1500){
+      const fps = (fpsSamples * 1000) / fpsElapsed;
+      if(fps < 48) qualityScale = Math.max(0.55, qualityScale - 0.12);
+      else if(fps < 55) qualityScale = Math.max(0.68, qualityScale - 0.06);
+      else if(fps > 57) qualityScale = Math.min(1, qualityScale + 0.035);
+      fpsElapsed = 0;
+      fpsSamples = 0;
+    }
+
+    const q = getQuality();
+
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = `rgba(5,6,11,${q.fade})`;
+    ctx.fillRect(0,0,W,H);
+
+    ctx.globalCompositeOperation = 'lighter';
+
+    maybeLaunch(now);
+
+    // Hard cap immediately if quality was lowered while many particles exist.
+    if(particles.length > q.maxParticles){
+      particles.length = q.maxParticles;
+    }
+
+    rockets = rockets.filter(r => { r.update(dt); if(!r.dead) r.draw(ctx); return !r.dead; });
+    particles = particles.filter(p => { const alive = p.update(dt); if(alive) p.draw(ctx); return alive; });
+
+    ctx.globalAlpha = 1;
+  }
+
+  document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+
+  if(reduceMotion){
+    // gentle static-ish sky: draw a couple of soft glows once, no continuous bursts
+    ctx.globalCompositeOperation = 'lighter';
+    for(let i=0;i<3;i++){
+      const x = W*rand(0.3,0.7), y = H*rand(0.15,0.4);
+      const g = ctx.createRadialGradient(x,y,0,x,y,90);
+      g.addColorStop(0, pick(PALETTE)+'aa');
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(x,y,90,0,Math.PI*2); ctx.fill();
+    }
+  } else {
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
