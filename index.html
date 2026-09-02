@@ -21,7 +21,7 @@
     --violet:#8c7bf0;
     --cyan:#57e0c9;
     --hairline:rgba(255,255,255,0.09);
-    --glass:rgba(255,255,255,0.045);
+    --glass:rgba(255,255,255,0.025);
     --radius:18px;
   }
 
@@ -92,20 +92,80 @@
     text-align:center;
   }
 
-  .avatar{
-    width:64px;
-    height:64px;
-    border-radius:50%;
-    margin-bottom:26px;
-    background:
-      radial-gradient(circle at 35% 30%, rgba(255,255,255,0.9), rgba(240,185,61,0.35) 45%, rgba(140,123,240,0.25) 100%);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.12),
-      0 0 40px rgba(240,185,61,0.25),
-      0 0 80px rgba(140,123,240,0.15);
+  /* ---------- top signature badge ---------- */
+  .badge{
+    position:relative;
+    width:84px;
+    height:84px;
+    margin-bottom:30px;
     opacity:0;
-    transform:translateY(14px) scale(0.9);
-    animation: reveal 0.9s cubic-bezier(.2,.8,.2,1) 0.05s forwards;
+    transform:translateY(-16px) scale(0.85);
+    animation:
+      reveal-badge 0.9s cubic-bezier(.2,.8,.2,1) 0.05s forwards,
+      float 5s ease-in-out 1s infinite;
+  }
+  @keyframes reveal-badge{
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  @keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-7px); }
+  }
+  .badge::before,
+  .badge::after{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:5px; height:5px;
+    margin:-2.5px 0 0 -2.5px;
+    border-radius:50%;
+    background:var(--gold-soft);
+    box-shadow:0 0 9px 2px var(--gold-soft);
+    animation: orbit 7s linear infinite;
+  }
+  .badge::after{
+    background:var(--violet);
+    box-shadow:0 0 9px 2px var(--violet);
+    animation-duration:9.5s;
+    animation-direction:reverse;
+  }
+  @keyframes orbit{
+    from{ transform: rotate(0deg) translateX(50px) rotate(0deg); }
+    to{ transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+  }
+  .badge-ring{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    padding:2px;
+    background:conic-gradient(from 0deg, var(--gold-soft), var(--violet), var(--cyan), var(--gold-soft));
+    animation: spin 6.5s linear infinite;
+    box-shadow:
+      0 0 26px rgba(240,185,61,0.3),
+      0 0 55px rgba(140,123,240,0.22);
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .badge-inner{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(10,13,26,0.72);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:inset 0 0 22px rgba(255,255,255,0.06);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    letter-spacing:0.03em;
+    color:var(--ink-0);
+    animation: pulse-glow 3.4s ease-in-out infinite;
+  }
+  @keyframes pulse-glow{
+    0%,100%{ box-shadow:inset 0 0 22px rgba(255,255,255,0.06), 0 0 0 rgba(240,185,61,0); }
+    50%{ box-shadow:inset 0 0 22px rgba(255,255,255,0.1), 0 0 22px rgba(240,185,61,0.28); }
   }
 
   h1{
@@ -167,15 +227,18 @@
     background:var(--glass);
     border:1px solid var(--hairline);
     border-radius:var(--radius);
-    backdrop-filter:blur(18px) saturate(140%);
-    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    backdrop-filter:blur(24px) saturate(160%);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);
+    box-shadow:
+      0 8px 24px rgba(0,0,0,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.08);
     overflow:hidden;
     isolation:isolate;
     cursor:pointer;
     opacity:0;
     transform:translateY(14px);
     animation: reveal 0.8s cubic-bezier(.2,.8,.2,1) forwards;
-    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s ease, box-shadow 0.4s ease;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s ease, box-shadow 0.4s ease, background 0.35s ease;
   }
   .contacts .card:nth-child(1){ animation-delay:0.42s; }
   .contacts .card:nth-child(2){ animation-delay:0.5s; }
@@ -187,22 +250,30 @@
     position:absolute;
     inset:0;
     z-index:-1;
-    opacity:0;
-    background:radial-gradient(120px 80px at 15% 50%, var(--glow), transparent 70%);
+    opacity:0.28;
+    background:radial-gradient(140px 90px at 15% 50%, var(--glow), transparent 72%);
     transition:opacity 0.4s ease;
+  }
+  .card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 22%, transparent 45%);
+    pointer-events:none;
   }
 
   .card:hover,
   .card:focus-visible{
     transform:translateY(-4px) scale(1.015);
-    border-color:rgba(255,255,255,0.22);
+    background:rgba(255,255,255,0.06);
+    border-color:rgba(255,255,255,0.24);
     box-shadow:
       0 14px 34px rgba(0,0,0,0.35),
-      0 0 0 1px rgba(255,255,255,0.05) inset,
-      0 0 30px -4px var(--glow);
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 0 34px -4px var(--glow);
   }
   .card:hover::before,
-  .card:focus-visible::before{ opacity:0.55; }
+  .card:focus-visible::before{ opacity:0.65; }
 
   .card:focus-visible{
     outline:2px solid var(--gold-soft);
@@ -219,8 +290,8 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
     color:var(--glow);
     transition:transform 0.35s cubic-bezier(.2,.8,.2,1), color 0.35s ease;
   }
@@ -281,21 +352,58 @@
     position:relative;
     z-index:2;
     text-align:center;
-    padding:22px 20px 28px;
-    font-size:0.78rem;
-    color:var(--ink-2);
+    padding:20px 20px 30px;
     letter-spacing:0.01em;
+    opacity:0;
+    animation: reveal 0.9s cubic-bezier(.2,.8,.2,1) 0.78s forwards;
   }
-  footer span{ color:var(--gold-soft); }
+  .credit{
+    margin:0 0 5px;
+    font-size:0.92rem;
+    font-weight:600;
+    color:var(--ink-0);
+  }
+  .credit .name{
+    background:linear-gradient(100deg, var(--gold-soft), var(--violet) 85%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation: credit-glow 3.4s ease-in-out infinite;
+  }
+  @keyframes credit-glow{
+    0%,100%{ filter:brightness(1); }
+    50%{ filter:brightness(1.4); }
+  }
+  .credit .heart{
+    display:inline-block;
+    color:#f0729a;
+    animation: heartbeat 1.9s ease-in-out infinite;
+  }
+  @keyframes heartbeat{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.22); }
+  }
+  .made{
+    margin:0;
+    font-size:0.74rem;
+    color:var(--ink-2);
+  }
+  .made span{ color:var(--gold-soft); }
 
   @media (max-width:420px){
-    .stage{ padding:7vh 16px 12vh; }
+    .stage{ padding:6vh 16px 12vh; }
+    .badge{ width:64px; height:64px; margin-bottom:22px; }
+    .badge-inner{ font-size:0.92rem; }
+    @keyframes orbit{
+      from{ transform: rotate(0deg) translateX(38px) rotate(0deg); }
+      to{ transform: rotate(360deg) translateX(38px) rotate(-360deg); }
+    }
     .card{ padding:14px 15px; gap:13px; }
     .icon-wrap{ width:42px; height:42px; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .avatar,h1,.subtitle,.card{
+    .badge,.badge-ring,.badge-inner,.badge::before,.badge::after,h1,.subtitle,.card,footer{
       animation:none !important;
       opacity:1 !important;
       transform:none !important;
@@ -310,7 +418,11 @@
 <canvas id="fireworks" aria-hidden="true"></canvas>
 
 <main class="stage">
-  <div class="avatar" role="presentation"></div>
+  <div class="badge" role="presentation" aria-hidden="true">
+    <div class="badge-ring">
+      <div class="badge-inner">DL</div>
+    </div>
+  </div>
   <h1>Let&rsquo;s <em>connect</em></h1>
   <p class="subtitle">Find me on social media, or drop a line by email &mdash; I&rsquo;d love to hear from you.</p>
 
@@ -361,7 +473,10 @@
   </nav>
 </main>
 
-<footer>Made with <span>&hearts;</span> &bull; &copy; 2026</footer>
+<footer>
+  <p class="credit">Built by <span class="name">Diwas Lamsal</span> <span class="heart">&hearts;</span></p>
+  <p class="made">Made with <span>&hearts;</span> &bull; &copy; 2026</p>
+</footer>
 
 <script>
 (() => {
@@ -531,6 +646,28 @@
         }
         break;
       }
+      case 'flower': {
+        const petals = 6;
+        for(let i=0;i<count;i++){
+          const t = (i/count)*Math.PI*2;
+          const r = (0.55 + 0.45*Math.abs(Math.cos(petals*t/2))) * 4.4;
+          vecs.push([Math.cos(t)*r, Math.sin(t)*r]);
+        }
+        break;
+      }
+      case 'multilayer': {
+        const inner = Math.floor(count*0.4);
+        const outer = count - inner;
+        for(let i=0;i<inner;i++){
+          const a = (i/inner)*Math.PI*2;
+          vecs.push([Math.cos(a)*2.0, Math.sin(a)*2.0]);
+        }
+        for(let i=0;i<outer;i++){
+          const a = (i/outer)*Math.PI*2 + 0.3;
+          vecs.push([Math.cos(a)*4.9, Math.sin(a)*4.9]);
+        }
+        break;
+      }
       default: { // random/custom
         for(let i=0;i<count;i++){
           const a = rand(0,Math.PI*2);
@@ -542,21 +679,20 @@
     return vecs;
   }
 
-  const SHAPES = ['circle','star','heart','ring','spiral','burst','random'];
+  const SHAPES = ['circle','star','heart','ring','spiral','burst','random','flower','multilayer'];
 
   let particles = [];
   let rockets = [];
-  const MAX_PARTICLES = isSmall() ? 260 : 460;
+  const MAX_PARTICLES = isSmall() ? 320 : 640;
 
   class Rocket{
     constructor(){
-      const originX = W/2 + rand(-W*0.18, W*0.18);
+      const originX = W/2 + rand(-W*0.22, W*0.22);
       this.x = originX;
       this.y = H + 10;
-      this.targetY = rand(H*0.18, H*0.55);
-      const dist = this.y - this.targetY;
-      this.vy = -rand(9.5, 12.5);
-      this.vx = rand(-0.6,0.6);
+      this.targetY = rand(H*0.16, H*0.58);
+      this.vy = -rand(9.5, 13);
+      this.vx = rand(-1.6, 1.6);
       this.color = pick(PALETTE);
       this.trail = [];
       this.dead = false;
@@ -577,7 +713,7 @@
       if(particles.length > MAX_PARTICLES) return;
       const shape = pick(SHAPES);
       const budget = Math.max(0, MAX_PARTICLES - particles.length);
-      const count = Math.min(isSmall()? rand(24,36) : rand(34,54), budget);
+      const count = Math.min(isSmall()? rand(28,42) : rand(42,72), budget);
       const vecs = explosionVectors(shape, Math.floor(count));
       const life = rand(50,80);
       const baseColor = Math.random() < 0.35 ? pick(PALETTE) : this.color;
@@ -609,15 +745,18 @@
   }
 
   let lastLaunch = 0;
-  let nextInterval = rand(700, 1600);
-  const maxRockets = isSmall() ? 2 : 4;
+  let nextInterval = rand(350, 800);
+  const maxRockets = isSmall() ? 3 : 7;
 
   function maybeLaunch(now){
     if(reduceMotion) return;
     if(now - lastLaunch > nextInterval && rockets.length < maxRockets){
-      rockets.push(new Rocket());
+      const salvo = Math.random() < 0.3 ? Math.floor(rand(2, isSmall() ? 3 : 4)) : 1;
+      for(let i=0; i<salvo && rockets.length < maxRockets; i++){
+        rockets.push(new Rocket());
+      }
       lastLaunch = now;
-      nextInterval = rand(650, 1700);
+      nextInterval = rand(isSmall() ? 380 : 260, isSmall() ? 850 : 680);
     }
   }
 
